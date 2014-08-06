@@ -36,6 +36,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <WixExtension Include="WixCommonUiExtension">
+      <HintPath>..\..\lib\msiext-1.4\WixExtensions\WixCommonUiExtension.dll</HintPath>
+      <Name>WixCommonUiExtension</Name>
+    </WixExtension>
     <WixExtension Include="WixDataSourceExtension">
       <HintPath>..\..\lib\msiext-1.4\WixExtensions\WixDataSourceExtension.dll</HintPath>
       <Name>WixDataSourceExtension</Name>

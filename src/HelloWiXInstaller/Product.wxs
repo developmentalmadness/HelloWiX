@@ -6,16 +6,20 @@
 		<MediaTemplate EmbedCab="yes" />
 
 		<Property Id="FULL_NAME" Value="Mark J. Miller (installed)" />
-		<Property Id="SQLSERVER" Value="(local)" />
-		<Property Id="SQLDATABASE" Value="OMDatabase" />
-		<Property Id="SQLINSTALLUSER" Value="sa" />
-		<Property Id="SQLINSTALLPWD" />
-		<Property Id="SQLUSER" />
-		<Property Id="SQLPWD" />
 
-		<!--<data:ODBCConnection Id="ODBC_OMDatabase" ConnectionString="{SQL Server};Server=(local);Database=OMDatabase;Trusted_Connection=Yes;" />
-		<data:MSSQLDatabaseConnection Id="MSSQL_OMDatabase" IpAddress="(local)" WindowsAuthentication="yes" />-->
-		
+		<Property Id="PORTNUMBER" Value="9001" />
+		<Property Id="CURRENTPORTNUMBER" Value="135" />
+		<Property Id="SERVICE_LOGON_BROWSE" Value="1" />
+		<Property Id="SERVICE_REQUIRE_ADMIN" Value="1" />
+
+		<Property Id="CREATE_DATABASE_LOGON_TYPE" Value="SqlAuth" />
+        <Property Id="CHECK_CREATE_DATABASE_PERMS" Value="yes" />
+
+        <Property Id="RUNTIME_DATABASE_LOGON_TYPE" Value="WinAuth" />
+        <Property Id="CHECK_RUNTIME_DATABASE_PERMS" Value="yes" />
+        <Property Id="RUNTIME_DATABASE_NAME" Value="Northwind" />
+        <Property Id="RUNTIME_DATABASE_PERMS_TABLE" Value="Authors" />
+
 		<Directory Id="TARGETDIR" Name="SourceDir">
 			<Directory Id="ProgramFilesFolder">
 				<Directory Id="INSTALLFOLDER" Name="developMENTALmadness">
@@ -52,7 +56,7 @@
 
 		<UIRef Id="CustomWizard"/>
 
-		<Binary Id="WixUI_Bmp_Banner" SourceFile="$(var.HelloWiX.ProjectDir)info.png" />
-		<Binary Id="WixUI_Ico_Info" SourceFile="$(var.HelloWiX.ProjectDir)favicon.ico"/>
+		<!--<Binary Id="WixUI_Bmp_Banner" SourceFile="$(var.HelloWiX.ProjectDir)info.png" />
+		<Binary Id="WixUI_Ico_Info" SourceFile="$(var.HelloWiX.ProjectDir)favicon.ico"/>-->
 	</Product>
 </Wix>
