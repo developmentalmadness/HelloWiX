@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+	<Fragment>
+		<UI Id="CustomWizard">
+			<TextStyle Id="Tahoma_Regular" FaceName="Tahoma" Size="8"/>
+			<Property Id="DefaultUIFont" Value="Tahoma_Regular" />
+			<TextStyle Id="WixUI_Font_Title" FaceName="Tahoma" Size="10" Bold="yes"/>
+
+			<Dialog Id="InstallDlg" Width="370" Height="270" Title="DevelopMENTALMadness" NoMinimize="no">
+				<Control Id="SqlServerLabel" Type="Text" Text="Sql Server Instance:" Height="17" Width="100" X="25" Y="50" />
+				<Control Id="SqlServerName" Type="Edit" Property="SQLSERVER" Height="17" Width="200" X="140" Y="50" />
+
+				<Control Id="SqlDatabaseLabel" Type="Text" Text="Database Name:" Height="17" Width="100" X="25" Y="75" />
+				<Control Id="SqlDatabaseName" Type="Edit" Property="SQLDATABASE" Height="17" Width="200" X="140" Y="75" />
+
+				<Control Id="SqlInstallUserLabel" Type="Text" Text="Sql Admin User:" Height="17" Width="100" X="25" Y="100"/>
+				<Control Id="SqlInstallUser" Type="Edit" Property="SQLINSTALLUSER" Height="17" Width="200" X="140" Y="100" />
+
+				<Control Id="SqlInstallPwdLabel" Type="Text" Text="Sql Admin Password:" Height="17" Width="100" X="25" Y="125" />
+				<Control Id="SqlInstallPwd" Type="Edit" Property="SQLINSTALLPWD" Height="17" Width="200" X="140" Y="125" Password="yes" />
+
+				<Control Id="SqlUserLabel" Type="Text" Text="Sql Application User:" Height="17" Width="100" X="25" Y="150" />
+				<Control Id="SqlUser" Type="Edit" Property="SQLUSER" Height="17" Width="200" X="140" Y="150" />
+
+				<Control Id="SqlPwdLabel" Type="Text" Text="Sql Application Password:" Height="17" Width="100" X="25" Y="175" />
+				<Control Id="SqlPwd" Type="Edit" Property="SQLPWD" Height="17" Width="200" X="140" Y="175" Password="yes" />
+
+				<Control Id="InstallButton" Type="PushButton" X="245" Y="243" Width="100" Height="17" Text="Install" ElevationShield="yes">
+					<Publish Event="EndDialog" Value="Return" />
+				</Control>
+				<Control Id="CancelButton" Type="PushButton" Text="Cancel" Height="17" Width="56" X="180" Y="243" Cancel="yes">
+					<Publish Event="EndDialog" Value="Exit" />
+				</Control>
+			</Dialog>
+
+			<DialogRef Id="ProgressDlg"/>
+
+			<InstallUISequence>
+				<Show Dialog="InstallDlg" Before="ExecuteAction" />
+				<Show Dialog="ProgressDlg" After="InstallDlg" />
+			</InstallUISequence>
+		</UI>
+	</Fragment>
+</Wix>

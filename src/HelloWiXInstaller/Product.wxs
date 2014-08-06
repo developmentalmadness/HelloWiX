@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi" xmlns:util="http://schemas.microsoft.com/wix/UtilExtension">
+	<Product Id="{F15C9D98-5296-417C-847F-1DC1E67C3498}" Name="HelloWiXInstaller" Manufacturer="developMENTALmadness" Language="1033" Version="1.0.0.0" UpgradeCode="a3be08fb-680d-425a-a471-4ab16e4aa805">
+		<Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
+
+		<MediaTemplate EmbedCab="yes" />
+
+		<Property Id="FULL_NAME" Value="Mark J. Miller (installed)" />
+		<Property Id="SQLSERVER" Value="(local)" />
+		<Property Id="SQLDATABASE" Value="OMDatabase" />
+		<Property Id="SQLINSTALLUSER" Value="sa" />
+		<Property Id="SQLINSTALLPWD" />
+		<Property Id="SQLUSER" />
+		<Property Id="SQLPWD" />
+
+		<Directory Id="TARGETDIR" Name="SourceDir">
+			<Directory Id="ProgramFilesFolder">
+				<Directory Id="INSTALLFOLDER" Name="developMENTALmadness">
+					<Component Id="CMP_HelloWiX.exe" Guid="{38FC6E96-37D6-4A2D-A584-F7D84705AC34}">
+						<File Id="EXE_HelloWiX.exe" Source="$(var.HelloWiX.TargetPath)" />
+					</Component>
+				</Directory>
+			</Directory>
+			<Directory Id="CommonAppDataFolder">
+				<Directory Id="CONFIGFOLDER" Name="developMENTALmadness">
+					<Component Id="CMP_HelloWiX.exe.config" Guid="{6D470FDB-BF36-4648-BDBD-63D168F8D085}">
+						<File Id="CONFIG_HelloWiX.exe.config" Source="$(var.HelloWiX.TargetPath).config" />
+						<util:XmlFile Id="SetConfigValue" Action="setValue"
+									  File="[CONFIGFOLDER]$(var.HelloWiX.TargetFileName).config"
+									  ElementPath="/configuration/appSettings/add[\[]@key='FullName'[\]]"
+									  Value="[FULL_NAME]"
+									  SelectionLanguage="XPath"
+									  Name="value"/>
+						<util:XmlFile Id="SetSqlConnection" Action="setValue"
+									  ElementPath="/configuration/connectionStrings/add[\[]@name='database'[\]]"
+									  File="[CONFIGFOLDER]$(var.HelloWiX.TargetFileName).config"
+									  Value="Server=[SQLSERVER];Database=[SQLDATABASE];uid=[SQLUSER];pwd=[SQLPWD];"
+									  Sequence="1"
+									  SelectionLanguage="XPath" Name="connectionString"  />
+					</Component>
+				</Directory>
+			</Directory>
+		</Directory>
+
+		<Feature Id="HelloWiXProduct" Title="Hello, WiX" Level="1">
+			<ComponentRef Id="CMP_HelloWiX.exe" />
+			<ComponentRef Id="CMP_HelloWiX.exe.config" />
+		</Feature>
+
+		<UIRef Id="CustomWizard"/>
+
+		<Binary Id="WixUI_Bmp_Banner" SourceFile="$(var.HelloWiX.ProjectDir)info.png" />
+		<Binary Id="WixUI_Ico_Info" SourceFile="$(var.HelloWiX.ProjectDir)favicon.ico"/>
+	</Product>
+</Wix>
