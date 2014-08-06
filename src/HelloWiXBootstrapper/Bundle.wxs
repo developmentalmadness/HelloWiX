@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+	<Bundle Name="HelloWiXBootstrapper" Version="1.0.0.0" Manufacturer="developMENTALmadness" UpgradeCode="8d27c1e5-35d5-44c5-bf4d-0895a4ed5564">
+		<BootstrapperApplicationRef Id="WixStandardBootstrapperApplication.RtfLicense" />
+
+		<Chain>
+			<!-- http://wixtoolset.org/documentation/manual/v3/howtos/redistributables_and_install_checks/install_dotnet.html -->
+			<PackageGroupRef Id="NetFx45Redist" />
+		</Chain>
+	</Bundle>
+</Wix>
